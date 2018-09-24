@@ -4,25 +4,21 @@ import { RootState } from "./reducer";
 import { Mobile } from "./types"
 import axios from "axios";
 import { Actions } from "./actions";
-
-interface LocalState {
-    mobiles: Mobile[],
-    fetchMobiles: Function,
-    fetchSuccess: Function,
-    fetchError: Function
-}
+import { Dispatch } from "redux";
 
 const mapStateToProps = (state: RootState) => ({
     mobiles: state.mobiles as Mobile[]
 })
 
-const mapDispatchToProps = {
-    fetchMobiles: Actions.fetchMobiles,
-    fetchSuccess: Actions.fetchMobilesSuccess,
-    fetchFail: Actions.fetchMobilesError
-}
+const mapDispatchToProps = (dispatch: Dispatch) => ({
+    fetchMobiles: () => dispatch(Actions.fetchMobiles()),
+    fetchSuccess: (data: Mobile[]) => dispatch(Actions.fetchMobilesSuccess(data)),
+    fetchFail: (msg: string) => dispatch(Actions.fetchMobilesError(msg)),
+})
 
-class PhoneListContainer extends React.Component<LocalState, {}> {
+type ContainerProps = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
+
+class PhoneListContainer extends React.Component<ContainerProps, {}> {
     componentDidMount() {
         this.props.fetchMobiles()
         axios.get(process.env.API)
@@ -30,11 +26,11 @@ class PhoneListContainer extends React.Component<LocalState, {}> {
                 if (response.status < 400) {
                     this.props.fetchSuccess(response.data)
                 } else {
-                    this.props.fetchError(response.statusText)
+                    this.props.fetchFail(response.statusText)
                 }
             })
             .catch(error => {
-                this.props.fetchError(error)
+                this.props.fetchFail(error)
             })
     }
     render() {
