@@ -4,19 +4,18 @@ import { RootState } from "./reducer";
 import { Mobile } from "./types"
 import axios from "axios";
 import { Actions } from "./actions";
-import { Dispatch } from "redux";
 
 const mapStateToProps = (state: RootState) => ({
     mobiles: state.mobiles as Mobile[]
 })
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-    fetchMobiles: () => dispatch(Actions.fetchMobiles()),
-    fetchSuccess: (data: Mobile[]) => dispatch(Actions.fetchMobilesSuccess(data)),
-    fetchFail: (msg: string) => dispatch(Actions.fetchMobilesError(msg)),
-})
+const mapDispatchToProps = {
+    fetchMobiles: Actions.fetchMobiles,
+    fetchSuccess: Actions.fetchMobilesSuccess,
+    fetchFail: Actions.fetchMobilesError,
+}
 
-type ContainerProps = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>;
+type ContainerProps = typeof mapDispatchToProps & ReturnType<typeof mapStateToProps>;
 
 class PhoneListContainer extends React.Component<ContainerProps, {}> {
     componentDidMount() {
