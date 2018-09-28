@@ -2,15 +2,17 @@
 import { Reducer } from "redux";
 import { Mobile } from "./types"
 import * as fromActions from './actions'
+import { RouterState } from 'connected-react-router'
 
-export type RootState = typeof initialState
+export type RootState = typeof initialState & { router: RouterState }
 
 export const initialState = {
     mobiles: [] as Mobile[],
     detailMobile: {} as Mobile,
     loading: false,
     error: false,
-    errorMsg: ""
+    errorMsg: "",
+    router: null
 };
 
 export const rootReducer: Reducer<RootState> = (

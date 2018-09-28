@@ -8,6 +8,9 @@ import { PhoneDetailComponent } from "./PhoneDetailComponent";
 import { Route, Switch } from 'react-router'
 import axios from "axios"
 import { Actions } from "./actions";
+import { Theme as UWPThemeProvider, getTheme } from "react-uwp/Theme";
+import Layout from "./Layout";
+
 
 const config = configureStore();
 
@@ -29,15 +32,23 @@ class App extends React.Component {
     }
     render() {
         return <Provider store={config.store}>
-            <ConnectedRouter history={config.history}>
-                <div>
-                    <Switch>
-                        <Route exact path="/details/:id" component={PhoneDetailComponent} />
-                        <Route render={() => (<PhoneListContainer />)} />
-                    </Switch>
-                </div>
-            </ConnectedRouter>
-        </Provider>
+            <UWPThemeProvider
+                style={{ backgroundColor: "rgba(0,0,0,0.3)" }}
+                theme={getTheme({
+                    useFluentDesign: true,
+                    desktopBackgroundImage: "http://getwallpapers.com/wallpaper/full/3/d/6/12799.jpg"
+                })}
+            >
+                <Layout>
+                    <ConnectedRouter history={config.history}>
+                        <Switch>
+                            <Route exact path="/details/:id" component={PhoneDetailComponent} />
+                            <Route component={PhoneListContainer} />
+                        </Switch>
+                    </ConnectedRouter>
+                </Layout>
+            </UWPThemeProvider>
+        </Provider >
     }
 }
 

@@ -14,13 +14,15 @@ app.get('/phones', (req, res) => {
         title: "Samsung S7",
         color: "blue",
         description: "Movil chulo",
+        image: "https://images.samsung.com/is/image/samsung/es-galaxy-s7-g930f-sm-g930fzkaphe-001-front2-black?$PD_GALLERY_L_JPG$",
         price: 1500
     }, {
         id: 2,
         title: "iPhone 7",
         color: "yellow",
         description: "Movil chulo",
-        price: 1500
+        image: "https://www.aca-electronic.com/52-thickbox_default/iphone-7-a1778-32gb-ios10-120mp-ram-2gb-4g-lte.jpg",
+        price: 5500
     }]
     res.send(JSON.stringify(mobiles))
 })
