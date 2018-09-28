@@ -35,7 +35,7 @@ class PhoneDetailComponentClass extends React.Component<ContainerProps> {
                     <Separator />,
                     <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
                         <p>Description:</p>
-                        <p>{mobile.description}</p>
+                        <p style={{ marginLeft: 10 }}>{mobile.description}</p>
                     </div>,
                     <div style={{ display: "flex", justifyContent: "space-between", width: "100%" }}>
                         <p>Color:</p>
@@ -46,7 +46,7 @@ class PhoneDetailComponentClass extends React.Component<ContainerProps> {
                         <p>{mobile.price}€</p>
                     </div>,
                     <div style={{ width: "100%" }}>
-                        <img src={mobile.image} alt="" style={{ maxWidth: "100%", opacity: 0.8 }} />
+                        <img src={mobile.image} alt="" style={{ maxWidth: "100%" }} />
                     </div>
                 ]}>
                 </ListView>
