@@ -5,11 +5,16 @@
   "main": "index.html",
   "dependencies": {
     "@martin_hotell/rex-tils": "^0.13.2",
+    "@types/enzyme": "^3.1.14",
     "@types/history": "^4.7.0",
+    "@types/jest": "^23.3.2",
     "@types/react-router": "^4.0.31",
     "axios": "^0.18.0",
     "connected-react-router": "^4.5.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "^1.5.0",
     "history": "^4.7.2",
+    "jest": "^23.6.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
@@ -17,7 +22,9 @@
     "react-uwp": "^1.2.2",
     "redux": "^4.0.0",
     "redux-devtools-extension": "^2.13.5",
-    "reselect": "^3.0.1"
+    "redux-mock-store": "^1.5.3",
+    "reselect": "^3.0.1",
+    "ts-jest": "^23.10.2"
   },
   "devDependencies": {
     "@types/react": "^16.4.14",
@@ -30,5 +37,19 @@
   },
   "keywords": [],
   "author": "Jairo Caro-Accino Viciana",
-  "license": "MIT"
+  "license": "MIT",
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "setupFiles": [
+      "./test-setup/.jestrc.js"
+    ],
+    "testRegex": "/src/.*\\.test\\.(ts|tsx|js)$"
+  }
 }
