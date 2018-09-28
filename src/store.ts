@@ -1,12 +1,17 @@
-import { createStore } from "redux";
-import { rootReducer, initialState } from "./reducer";
-import { devToolsEnhancer } from 'redux-devtools-extension';
+import { createStore, applyMiddleware } from "redux"
+import { rootReducer, initialState } from "./reducer"
+import { composeWithDevTools } from 'redux-devtools-extension'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware, connectRouter } from 'connected-react-router'
+
+
 
 export const configureStore = () => {
+    const history = createBrowserHistory()
     const store = createStore(
-        rootReducer,
+        connectRouter(history)(rootReducer),
         initialState,
-        devToolsEnhancer({})
+        composeWithDevTools(applyMiddleware(routerMiddleware(history)))
     )
 
     if (module['hot']) {
@@ -15,5 +20,8 @@ export const configureStore = () => {
         })
     }
 
-    return store
+    return {
+        store,
+        history
+    }
 }

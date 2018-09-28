@@ -7,6 +7,7 @@ export type RootState = typeof initialState
 
 export const initialState = {
     mobiles: [] as Mobile[],
+    detailMobile: {} as Mobile,
     loading: false,
     error: false,
     errorMsg: ""

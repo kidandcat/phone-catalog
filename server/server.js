@@ -10,11 +10,13 @@ app.use(function (req, res, next) {
 
 app.get('/phones', (req, res) => {
     const mobiles = [{
+        id: 1,
         title: "Samsung S7",
         color: "blue",
         description: "Movil chulo",
         price: 1500
     }, {
+        id: 2,
         title: "iPhone 7",
         color: "yellow",
         description: "Movil chulo",
